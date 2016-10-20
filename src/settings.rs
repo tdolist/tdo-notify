@@ -69,7 +69,7 @@ impl Settings {
     pub fn store(self, path: &String) -> Settings {
         let mut file = File::create(path.to_owned() + "notify.json").unwrap();
         let save = from(self.clone());
-        save.write_pretty(&mut file, 4);
+        let _ = save.write_pretty(&mut file, 4);
         self
     }
 }
