@@ -10,7 +10,7 @@ pub struct Settings {
     pub server: String,
     pub user: String,
     pub pass: String,
-    pub port: u16,
+    pub port: u16
 }
 
 impl Into<JsonValue> for Settings {
@@ -22,7 +22,6 @@ impl Into<JsonValue> for Settings {
             "user" => self.user,
             "pass" => self.pass,
             "port" => self.port
-
         }
     }
 }
@@ -41,7 +40,7 @@ impl Settings {
             server: server,
             user: user,
             pass: pass,
-            port: port,
+            port: port
         }
     }
     pub fn load(path: &String) -> Result<Settings, Error> {

@@ -6,3 +6,4 @@ authors = ["h4llow3En <mail@felixdoering.com>"]
 [dependencies]
 json = "0.10.2"
 lettre = "0.6.0"
+libc = "0.2"

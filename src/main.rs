@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate json;
 extern crate lettre;
+extern crate libc;
 use std::env;
 mod mailing;
 mod settings;
