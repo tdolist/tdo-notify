@@ -27,8 +27,15 @@ pub fn send_mail(mail: Email, server: String, user: String, pass: String, port: 
 }
 
 fn gen_body(content: &String) -> String {
-    let mut head: String = format!("Hello {},\nhere are your undone tasks.\n\n\n", get_user_name().unwrap());
-    head.push_str(content);
+    let mut head: String;
+    if content == "" {
+        head = format!("Hello {},\n\nCongratulation, you have no undone tasks! :-)",
+                       get_user_name().unwrap());
+    } else {
+        head = format!("Hello {},\nhere are your undone tasks.\n\n\n",
+                       get_user_name().unwrap());
+        head.push_str(content);
+    }
     head
 }
 
