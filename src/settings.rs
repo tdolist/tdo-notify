@@ -47,7 +47,7 @@ impl Settings {
                     Err(_) => Err(StorageError::FileCorrupted),
                 }
             }
-            Err(_) => Err(StorageError::FileCorrupted),
+            Err(_) => Err(StorageError::FileNotFound),
         }
     }
 
