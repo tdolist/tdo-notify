@@ -1,5 +1,5 @@
 [package]
-name = "tdo_notify"
+name = "tdo-notify"
 version = "0.1.0"
 authors = ["Felix Wittwer <dev@felixwittwer.de>", "h4llow3En <mail@felixdoering.com>"]
 
