@@ -1,9 +1,11 @@
+//! Implementation of mail generation.
 use lettre::transport::EmailTransport;
 use lettre::transport::smtp::{error, SecurityLevel, SmtpTransportBuilder};
 use lettre::email::{Email, EmailBuilder};
 use settings::Settings;
 use util::gen_tasks;
 
+/// Generates a mail with given values.
 pub fn gen_mail(tdo: &super::list::Tdo, settings: &Settings) -> Email {
     EmailBuilder::new()
         .to(settings.mailto.as_str())
@@ -14,6 +16,7 @@ pub fn gen_mail(tdo: &super::list::Tdo, settings: &Settings) -> Email {
         .unwrap()
 }
 
+/// Send a mail with given settings.
 pub fn send_mail(mail: Email, settings: &Settings) -> Result<(), error::Error> {
     let mut sender = SmtpTransportBuilder::new((settings.server.as_str(), settings.port))
         .unwrap()
@@ -28,6 +31,7 @@ pub fn send_mail(mail: Email, settings: &Settings) -> Result<(), error::Error> {
     }
 }
 
+/// Generate the mail body with all undone tasks
 pub fn gen_body(tdo: &super::list::Tdo, name: &str) -> String {
     match gen_tasks(tdo) {
         Some(x) => {

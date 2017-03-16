@@ -1,3 +1,9 @@
+//! The notification module for Tdo server.
+#![deny(missing_docs, unsafe_code,
+        missing_copy_implementations,
+        trivial_casts, trivial_numeric_casts,
+        unused_import_braces, unused_qualifications)]
+#![warn(missing_debug_implementations)]
 #[macro_use]
 extern crate serde_derive;
 extern crate serde_json;

@@ -1,6 +1,8 @@
+//! Collection of some utility functions.
 use super::libc;
 use std::{slice, io, ptr};
 
+/// Generates a well formated String of all undone Todos
 pub fn gen_tasks(tdo: &super::list::Tdo) -> Option<String> {
     let mut listed = String::new();
     for list in tdo.to_owned().lists.into_iter() {
@@ -23,13 +25,14 @@ pub fn gen_tasks(tdo: &super::list::Tdo) -> Option<String> {
     }
 }
 
+/// Returns the full Name of the current user if present.
+#[allow(unsafe_code)]
 pub fn get_full_name() -> Result<String, io::Error>{
     unsafe {
         let uid = libc::geteuid();
         let user = ptr::read(libc::getpwuid(uid));
         let name = String::from_utf8_unchecked(slice::from_raw_parts(user.pw_gecos as *const u8,
-                                                                     libc::strlen(user.pw_gecos) as
-                                                                     usize)
+                                                                     libc::strlen(user.pw_gecos))
             .to_vec());
         if name == "" {
             Err(io::Error::last_os_error())
