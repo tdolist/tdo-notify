@@ -6,7 +6,7 @@ use settings::Settings;
 use util::gen_tasks;
 
 /// Generates a mail with given values.
-pub fn gen_mail(tdo: &super::list::Tdo, settings: &Settings) -> Email {
+pub fn gen_mail(tdo: &super::tdo::Tdo, settings: &Settings) -> Email {
     EmailBuilder::new()
         .to(settings.mailto.as_str())
         .from((settings.mailfrom.as_str(), "tdo notify"))
@@ -32,7 +32,7 @@ pub fn send_mail(mail: Email, settings: &Settings) -> Result<(), error::Error> {
 }
 
 /// Generate the mail body with all undone tasks
-pub fn gen_body(tdo: &super::list::Tdo, name: &str) -> String {
+pub fn gen_body(tdo: &super::tdo::Tdo, name: &str) -> String {
     match gen_tasks(tdo) {
         Some(x) => {
             let mut tasks = format!("Hello {},\n\nhere are your undone tasks.\n\n\n", name);

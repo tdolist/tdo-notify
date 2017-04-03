@@ -12,7 +12,7 @@ extern crate lettre;
 extern crate base64;
 extern crate libc;
 
-use tdo_core::list;
+use tdo_core::tdo;
 pub mod settings;
 pub mod util;
 pub mod mail;

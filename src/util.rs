@@ -3,7 +3,7 @@ use super::libc;
 use std::{slice, io, ptr};
 
 /// Generates a well formated String of all undone Todos
-pub fn gen_tasks(tdo: &super::list::Tdo) -> Option<String> {
+pub fn gen_tasks(tdo: &super::tdo::Tdo) -> Option<String> {
     let mut listed = String::new();
     for list in tdo.to_owned().lists.into_iter() {
         let undone = list.list_undone();
