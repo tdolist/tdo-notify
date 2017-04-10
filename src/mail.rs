@@ -3,7 +3,8 @@ use lettre::transport::EmailTransport;
 use lettre::transport::smtp::{error, SecurityLevel, SmtpTransportBuilder};
 use lettre::email::{Email, EmailBuilder};
 use settings::Settings;
-use util::gen_tasks;
+use tdo_export;
+
 
 /// Generates a mail with given values.
 pub fn gen_mail(tdo: &super::tdo::Tdo, settings: &Settings) -> Email {
@@ -33,7 +34,7 @@ pub fn send_mail(mail: Email, settings: &Settings) -> Result<(), error::Error> {
 
 /// Generate the mail body with all undone tasks
 pub fn gen_body(tdo: &super::tdo::Tdo, name: &str) -> String {
-    match gen_tasks(tdo) {
+    match tdo_export::gen_tasks_mail(tdo) {
         Some(x) => {
             let mut tasks = format!("Hello {},\n\nhere are your undone tasks.\n\n\n", name);
             tasks.push_str(&x);
