@@ -54,10 +54,10 @@ impl Settings {
                 let raw = String::from_utf8(decode(&encoded).unwrap()).unwrap();
                 match super::serde_json::from_str(&raw) {
                     Ok(settings) => Ok(settings),
-                    Err(_) => Err(StorageError::FileCorrupted.into()),
+                    Err(_) => Err(ErrorKind::StorageError(storage_error::ErrorKind::FileCorrupted).into()),
                 }
             }
-            Err(_) => Err(StorageError::FileNotFound.into()),
+            Err(_) => Err(ErrorKind::StorageError(storage_error::ErrorKind::FileNotFound).into())
         }
     }
 
@@ -68,10 +68,10 @@ impl Settings {
                 let raw = super::serde_json::to_string(self).unwrap().into_bytes();
                 match file.write(&encode(&raw[..]).into_bytes()) {
                     Ok(_) => Ok(()),
-                    Err(_) => Err(StorageError::SaveFailure.into()),
+                    Err(_) => Err(ErrorKind::StorageError(storage_error::ErrorKind::SaveFailure).into()),
                 }
             }
-            Err(_) => Err(StorageError::SaveFailure.into()),
+            Err(_) => Err(ErrorKind::StorageError(storage_error::ErrorKind::SaveFailure).into()),
         }
     }
 }
